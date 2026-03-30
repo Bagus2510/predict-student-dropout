@@ -261,6 +261,6 @@
             "percentage": "0.0%"
         }
     ],
-    "timestamp": "20260329_225907",
-    "model_file": "best_rf_model_20260329_225907.pkl"
+    "timestamp": "20260330_110849",
+    "model_file": "best_rf_classifier_model_20260330_110849.pkl"
 }
