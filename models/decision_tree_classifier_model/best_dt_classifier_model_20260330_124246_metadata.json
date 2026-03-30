@@ -1,0 +1,92 @@
+{
+    "model_name": "Tuned Decision Tree Classifier with No Outliers and Selected Features",
+    "description": "This model is a Decision Tree Classifier that has been tuned using GridSearchCV with a coarse-to-fine search strategy. It was trained on the dataset that excludes outliers and uses selected features only.",
+    "training_data": {
+        "dataset": "data_cleaned_selected_with_no_outliers.csv",
+        "features": [
+            "Curricular units 2nd sem (approved)",
+            "Curricular units 2nd sem (grade)",
+            "Curricular units 2nd sem (enrolled)",
+            "Tuition fees up to date",
+            "Scholarship holder"
+        ],
+        "target": "Target",
+        "train_test_split": "80% train, 20% test",
+        "random_state": 42
+    },
+    "hyperparameters": {
+        "criterion": "entropy",
+        "max_depth": 7,
+        "max_features": 0.3,
+        "min_samples_leaf": 1,
+        "min_samples_split": 3,
+        "splitter": "best",
+        "class_weight": null
+    },
+    "performance": {
+        "accuracy": 0.7254901960784313,
+        "roc_auc": 0.8265560692337326,
+        "classification_report": {
+            "0": {
+                "precision": 0.7787610619469026,
+                "recall": 0.6875,
+                "f1-score": 0.7302904564315352,
+                "support": 256.0
+            },
+            "1": {
+                "precision": 0.4295774647887324,
+                "recall": 0.3609467455621302,
+                "f1-score": 0.39228295819935693,
+                "support": 169.0
+            },
+            "2": {
+                "precision": 0.7855711422845691,
+                "recall": 0.8868778280542986,
+                "f1-score": 0.8331562167906482,
+                "support": 442.0
+            },
+            "accuracy": 0.7254901960784313,
+            "macro avg": {
+                "precision": 0.664636556340068,
+                "recall": 0.6451081912054762,
+                "f1-score": 0.6519098771405134,
+                "support": 867.0
+            },
+            "weighted avg": {
+                "precision": 0.7141682448644548,
+                "recall": 0.7254901960784313,
+                "f1-score": 0.7168457031183747,
+                "support": 867.0
+            }
+        }
+    },
+    "feature_importance": [
+        {
+            "feature": "Curricular units 2nd sem (approved)",
+            "importance": 0.40407,
+            "percentage": "40.41%"
+        },
+        {
+            "feature": "Tuition fees up to date",
+            "importance": 0.210666,
+            "percentage": "21.07%"
+        },
+        {
+            "feature": "Curricular units 2nd sem (grade)",
+            "importance": 0.203045,
+            "percentage": "20.3%"
+        },
+        {
+            "feature": "Scholarship holder",
+            "importance": 0.092724,
+            "percentage": "9.27%"
+        },
+        {
+            "feature": "Curricular units 2nd sem (enrolled)",
+            "importance": 0.089495,
+            "percentage": "8.95%"
+        }
+    ],
+    "timestamp": "20260330_124246",
+    "model_file": "best_dt_classifier_model_20260330_124246.pkl"
+}
