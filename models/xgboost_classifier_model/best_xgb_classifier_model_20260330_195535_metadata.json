@@ -1,0 +1,268 @@
+{
+    "model_name": "Tuned XGBoost Classifier with No Outliers and Selected Features",
+    "description": "This model is an XGBoost Classifier that has been tuned using GridSearchCV with a coarse-to-fine search strategy. It was trained on the dataset that excludes outliers and uses selected features only.",
+    "training_data": {
+        "dataset": "data_cleaned_selected_with_no_outliers.csv",
+        "features": [
+            "Marital status",
+            "Application mode",
+            "Application order",
+            "Course",
+            "Daytime/evening attendance",
+            "Previous qualification",
+            "Nacionality",
+            "Mother's qualification",
+            "Father's qualification",
+            "Mother's occupation",
+            "Father's occupation",
+            "Displaced",
+            "Educational special needs",
+            "Debtor",
+            "Tuition fees up to date",
+            "Gender",
+            "Scholarship holder",
+            "Age at enrollment",
+            "International",
+            "Curricular units 1st sem (credited)",
+            "Curricular units 1st sem (enrolled)",
+            "Curricular units 1st sem (evaluations)",
+            "Curricular units 1st sem (approved)",
+            "Curricular units 1st sem (grade)",
+            "Curricular units 1st sem (without evaluations)",
+            "Curricular units 2nd sem (credited)",
+            "Curricular units 2nd sem (enrolled)",
+            "Curricular units 2nd sem (evaluations)",
+            "Curricular units 2nd sem (approved)",
+            "Curricular units 2nd sem (grade)",
+            "Curricular units 2nd sem (without evaluations)",
+            "Unemployment rate",
+            "Inflation rate",
+            "GDP"
+        ],
+        "target": "Target",
+        "train_test_split": "80% train, 20% test",
+        "random_state": 42
+    },
+    "hyperparameters": {
+        "n_estimators": 400,
+        "max_depth": 2,
+        "learning_rate": 0.15,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.7,
+        "gamma": 0,
+        "reg_alpha": 0.1,
+        "reg_lambda": 1.5
+    },
+    "performance": {
+        "accuracy": 0.7559322033898305,
+        "roc_auc": 0.8779114987952595,
+        "classification_report": {
+            "0": {
+                "precision": 0.8327402135231317,
+                "recall": 0.740506329113924,
+                "f1-score": 0.7839195979899497,
+                "support": 316.0
+            },
+            "1": {
+                "precision": 0.45614035087719296,
+                "recall": 0.3443708609271523,
+                "f1-score": 0.39245283018867927,
+                "support": 151.0
+            },
+            "2": {
+                "precision": 0.7816326530612245,
+                "recall": 0.916267942583732,
+                "f1-score": 0.8436123348017621,
+                "support": 418.0
+            },
+            "accuracy": 0.7559322033898305,
+            "macro avg": {
+                "precision": 0.6901710724871831,
+                "recall": 0.6670483775416027,
+                "f1-score": 0.673328254326797,
+                "support": 885.0
+            },
+            "weighted avg": {
+                "precision": 0.7443452535992741,
+                "recall": 0.7559322033898305,
+                "f1-score": 0.7453208206445777,
+                "support": 885.0
+            }
+        }
+    },
+    "feature_importance": [
+        {
+            "feature": "Curricular units 2nd sem (approved)",
+            "importance": 0.219671,
+            "percentage": "21.97%"
+        },
+        {
+            "feature": "Tuition fees up to date",
+            "importance": 0.117028,
+            "percentage": "11.7%"
+        },
+        {
+            "feature": "Curricular units 1st sem (approved)",
+            "importance": 0.056131,
+            "percentage": "5.61%"
+        },
+        {
+            "feature": "Scholarship holder",
+            "importance": 0.051258,
+            "percentage": "5.13%"
+        },
+        {
+            "feature": "Curricular units 1st sem (enrolled)",
+            "importance": 0.041816,
+            "percentage": "4.18%"
+        },
+        {
+            "feature": "Curricular units 2nd sem (grade)",
+            "importance": 0.040879,
+            "percentage": "4.09%"
+        },
+        {
+            "feature": "Curricular units 1st sem (evaluations)",
+            "importance": 0.035086,
+            "percentage": "3.51%"
+        },
+        {
+            "feature": "Debtor",
+            "importance": 0.03113,
+            "percentage": "3.11%"
+        },
+        {
+            "feature": "Curricular units 2nd sem (enrolled)",
+            "importance": 0.030473,
+            "percentage": "3.05%"
+        },
+        {
+            "feature": "Curricular units 2nd sem (evaluations)",
+            "importance": 0.027771,
+            "percentage": "2.78%"
+        },
+        {
+            "feature": "Age at enrollment",
+            "importance": 0.023408,
+            "percentage": "2.34%"
+        },
+        {
+            "feature": "Course",
+            "importance": 0.022707,
+            "percentage": "2.27%"
+        },
+        {
+            "feature": "Gender",
+            "importance": 0.021736,
+            "percentage": "2.17%"
+        },
+        {
+            "feature": "Curricular units 1st sem (credited)",
+            "importance": 0.018204,
+            "percentage": "1.82%"
+        },
+        {
+            "feature": "Mother's occupation",
+            "importance": 0.018135,
+            "percentage": "1.81%"
+        },
+        {
+            "feature": "GDP",
+            "importance": 0.017706,
+            "percentage": "1.77%"
+        },
+        {
+            "feature": "International",
+            "importance": 0.016063,
+            "percentage": "1.61%"
+        },
+        {
+            "feature": "Application mode",
+            "importance": 0.015442,
+            "percentage": "1.54%"
+        },
+        {
+            "feature": "Unemployment rate",
+            "importance": 0.015441,
+            "percentage": "1.54%"
+        },
+        {
+            "feature": "Curricular units 2nd sem (credited)",
+            "importance": 0.014849,
+            "percentage": "1.48%"
+        },
+        {
+            "feature": "Father's occupation",
+            "importance": 0.014465,
+            "percentage": "1.45%"
+        },
+        {
+            "feature": "Mother's qualification",
+            "importance": 0.014215,
+            "percentage": "1.42%"
+        },
+        {
+            "feature": "Application order",
+            "importance": 0.014151,
+            "percentage": "1.42%"
+        },
+        {
+            "feature": "Curricular units 1st sem (grade)",
+            "importance": 0.014093,
+            "percentage": "1.41%"
+        },
+        {
+            "feature": "Daytime/evening attendance",
+            "importance": 0.013339,
+            "percentage": "1.33%"
+        },
+        {
+            "feature": "Previous qualification",
+            "importance": 0.013251,
+            "percentage": "1.33%"
+        },
+        {
+            "feature": "Curricular units 1st sem (without evaluations)",
+            "importance": 0.012885,
+            "percentage": "1.29%"
+        },
+        {
+            "feature": "Father's qualification",
+            "importance": 0.012401,
+            "percentage": "1.24%"
+        },
+        {
+            "feature": "Inflation rate",
+            "importance": 0.012092,
+            "percentage": "1.21%"
+        },
+        {
+            "feature": "Nacionality",
+            "importance": 0.011428,
+            "percentage": "1.14%"
+        },
+        {
+            "feature": "Displaced",
+            "importance": 0.011382,
+            "percentage": "1.14%"
+        },
+        {
+            "feature": "Curricular units 2nd sem (without evaluations)",
+            "importance": 0.008944,
+            "percentage": "0.89%"
+        },
+        {
+            "feature": "Marital status",
+            "importance": 0.008579,
+            "percentage": "0.86%"
+        },
+        {
+            "feature": "Educational special needs",
+            "importance": 0.003841,
+            "percentage": "0.38%"
+        }
+    ],
+    "timestamp": "20260330_195535",
+    "model_file": "best_xgb_classifier_model_20260330_195535.pkl"
+}
