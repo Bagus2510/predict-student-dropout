@@ -133,7 +133,7 @@ Predict Students Dropout Academic Success/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/Bagus2510/student-dropout-prediction.git
+git clone https://github.com/Bagus2510/predict-student-dropout.git
 cd student-dropout-prediction
 ```
 
