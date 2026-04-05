@@ -40,15 +40,16 @@ This project aims to predict **student dropout, enrollment, and graduation outco
 
 **✅ YES!** Our machine learning models successfully classify student outcomes with strong performance:
 
-- **XGBoost (Tuned)** achieved the highest **ROC-AUC of 0.9429** and **Accuracy of 80.84%**
-- **Random Forest (Tuned)** follows closely with **ROC-AUC of 0.9000** and **Accuracy of 79.12%**
-- **Decision Tree (Tuned)** achieves **ROC-AUC of 0.8370** and **Accuracy of 74.83%**
+- **XGBoost (Tuned)** achieved the highest **ROC-AUC of 0.8905** with the strongest **CV Mean of 0.7799**
+- **Random Forest (Tuned)** achieved the highest **Accuracy of 77.63%** and nearly matched XGBoost on ROC-AUC
+- **Decision Tree (Tuned)** remains competitive as a simpler baseline with **ROC-AUC of 0.8191**
 
 All models were validated through:
 - ✅ 5-Fold Cross Validation with GridSearchCV
 - ✅ Coarse-to-Fine hyperparameter tuning strategy
 - ✅ Evaluation on 4 dataset variants (All/No Outliers × All/Selected Features)
-- ✅ Consistent performance across confusion matrix, ROC curve, and feature importance analysis
+- ✅ Final fair comparison on the **same evaluation split** (same train/test data for all models)
+- ✅ Consistent performance across confusion matrix, ROC curve, class-level recall, and feature importance analysis
 
 ### ❓ Which features significantly affect student dropout prediction?
 
@@ -68,7 +69,7 @@ Based on **Feature Importance Analysis** across all three models, the top influe
 
 The dataset is sourced from the UCI Machine Learning Repository:
 
-🔗 **[Predict Students Dropout and Academic Success Dataset](https://www.kaggle.com/datasets/naveenkumar20bps1137 predict-students-dropout-and-academic-success)**
+🔗 **[Predict Students Dropout and Academic Success Dataset](https://www.kaggle.com/datasets/naveenkumar20bps1137/predict-students-dropout-and-academic-success)**
 
 ### Dataset Variants Used:
 | Variant | Description | Shape |
@@ -112,7 +113,7 @@ Predict Students Dropout Academic Success/
 │   ├── 01_eda.ipynb                          # Exploratory Data Analysis
 │   ├── 02_preprocessing.ipynb                # Data cleaning & preprocessing
 │   ├── 03_01_random_forest_classifier_model.ipynb
-│   ├── 03_02_desicion_tree_classifier_model.ipynb
+│   ├── 03_02_decision_tree_classifier_model.ipynb
 │   ├── 03_03_xgboost_classifier_model.ipynb
 │   └── 04_model_comparison.ipynb             # Final model comparison
 │
@@ -170,7 +171,7 @@ pip install -r requirements.txt
 - Full evaluation: classification report, confusion matrix, ROC curve, feature importance
 - Best model saved with metadata
 
-### 4️⃣ Decision Tree Classifier (`03_02_desicion_tree_classifier_model.ipynb`)
+### 4️⃣ Decision Tree Classifier (`03_02_decision_tree_classifier_model.ipynb`)
 - Baseline Decision Tree on all 4 dataset variants
 - Coarse-to-Fine tuning: RandomizedSearchCV → GridSearchCV
 - Full evaluation pipeline identical to Random Forest notebook
@@ -184,10 +185,12 @@ pip install -r requirements.txt
 
 ### 6️⃣ Model Comparison (`04_model_comparison.ipynb`)
 - Load all 3 best saved models from disk
-- Side-by-side metrics comparison (Accuracy, F1, ROC-AUC)
+- Re-train all 3 models on the same train split (fair comparison protocol)
+- Side-by-side metrics comparison (Accuracy, F1, ROC-AUC, CV Mean, CV Std)
 - Combined ROC curve and confusion matrix visualization
 - Feature importance comparison (Top 15 per model)
-- Final model recommendation
+- Cost-benefit simulation and fairness proxy checks (age group and tuition status)
+- Final model recommendation based on ROC-AUC + CV stability
 
 ---
 
@@ -195,11 +198,11 @@ pip install -r requirements.txt
 
 ### Overall Comparison — Tuned Models
 
-| Model | Accuracy | F1 (Macro) | F1 (Weighted) | ROC-AUC |
+| Model | Accuracy | F1 (Macro) | F1 (Weighted) | ROC-AUC | CV Mean (5-Fold) | CV Std |
 |---|---|---|---|---|
-| Random Forest | 0.7912 | 0.6184 | 0.7910 | 0.9000 |
-| Decision Tree | 0.7483 | 0.5569 | 0.7453 | 0.8370 |
-| **XGBoost** | **0.8084** | **0.7318** | **0.8311** | **0.9429** |
+| Random Forest | **0.7763** | 0.7063 | 0.7654 | 0.8876 | 0.7751 | **0.0088** |
+| Decision Tree | 0.7277 | 0.6514 | 0.7182 | 0.8191 | 0.7222 | 0.0146 |
+| **XGBoost** | 0.7751 | **0.7095** | **0.7675** | **0.8905** | **0.7799** | 0.0102 |
 
 ### 🏆 Best Model: XGBoost — All Outliers + All Features
 
@@ -219,9 +222,15 @@ pip install -r requirements.txt
 ```
 
 #### Model Generalization:
-- ✅ **ROC-AUC: 0.9429** — Excellent class discrimination
-- ✅ **No Overfitting** — Controlled via L1/L2 regularization and shallow trees
-- ✅ **Consistent Performance** — Validated across multiple dataset variants
+- ✅ **ROC-AUC: 0.8905** — Best class discrimination on fair evaluation split
+- ✅ **CV Mean: 0.7799 (Std: 0.0102)** — Stable cross-validation performance
+- ✅ **Balanced Performance** — Strong weighted F1 with robust Graduate and Dropout recall
+
+### 🧪 Validation Protocol (Updated)
+
+- Final comparison uses **the same dataset and same train-test split** for Random Forest, Decision Tree, and XGBoost.
+- Each model is rebuilt from saved best hyperparameters, then trained on that shared train set.
+- This avoids invalid comparison caused by testing different models on different datasets.
 
 ---
 
@@ -243,6 +252,19 @@ pip install -r requirements.txt
 2. **Proactive Financial Support** — Identify students with overdue tuition and offer financial aid or installment plans before dropout occurs.
 3. **Flexible Programs for Mature Students** — Design part-time pathways for older enrollees who face competing work and family commitments.
 4. **Sustain Monitoring Into Semester 2** — The transition into Semester 2 is a critical dropout risk window that is often overlooked.
+
+### 📉 Cost-Benefit Simulation (Best Model)
+
+Using the best model (XGBoost) on the fair evaluation split with simple assumptions:
+
+- Intervention cost per at-risk student: **150**
+- Estimated loss if one student drops out: **1200**
+- True Positive dropout alerts: **213**
+- False Positive alerts: **50**
+- Missed dropout cases (FN): **71**
+- Estimated net impact: **+130,950**
+
+This indicates a practical positive return for targeted intervention, while also highlighting that improving recall on the **Enrolled** class remains an important next step.
 
 ---
 
@@ -267,7 +289,7 @@ pip install -r requirements.txt
 jupyter notebook notebooks/01_eda.ipynb
 jupyter notebook notebooks/02_preprocessing.ipynb
 jupyter notebook notebooks/03_01_random_forest_classifier_model.ipynb
-jupyter notebook notebooks/03_02_desicion_tree_classifier_model.ipynb
+jupyter notebook notebooks/03_02_decision_tree_classifier_model.ipynb
 jupyter notebook notebooks/03_03_xgboost_classifier_model.ipynb
 jupyter notebook notebooks/04_model_comparison.ipynb
 ```
@@ -298,12 +320,6 @@ print(f"Predicted class: {prediction[0]}")  # Dropout / Enrolled / Graduate
 - [ ] Implement ensemble stacking across RF, DT, and XGBoost
 - [ ] Add model monitoring and data drift detection
 - [ ] Deploy as REST API for integration with student information systems
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
